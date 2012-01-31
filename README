@@ -1,0 +1,21 @@
+Trancybox
+
+A fork of Fancybox 1.3.4
+
+Primarily used to document modifications that are
+made to be used in the author's production projects.
+
+All commits pushed are tested in IE8+ and the latest
+FF and Chrome, and have been used on the author's
+production sites for a couple of weeks.
+
+No large new features will be added, only smoothing-out
+work and small-scale improvements that don't break
+backwards-compatibility.
+
+Modifications Copyright (c) 2012 Carlo Capocasa
+Modifications released under the same GPL/MIT license
+as jquery and the original fancybox
+
+http://jquery.org/license/
+
