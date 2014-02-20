@@ -588,7 +588,6 @@
 
 					} else if ((e.keyCode == 37 || e.keyCode == 39) && currentOpts.enableKeyboardNav && e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA' && e.target.tagName !== 'SELECT' && e.target.contentEditable != 'true') {
 						e.preventDefault();
-            console.log(e.target);
 						$.trancybox[ e.keyCode == 37 ? 'prev' : 'next']();
 					}
 				});
@@ -663,7 +662,6 @@
             if (measured_height > 500) {
               measured_height = 500;
             }
-            console.log(measured_height);
             content.height(measured_height);
             
             complete();
