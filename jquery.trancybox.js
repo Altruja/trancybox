@@ -1,3 +1,22 @@
+/*
+ * TrancyBox - jQuery Plugin
+ * Fork of the 1.3.4 of FancyBox, the simple and trancy lightbox alternative
+ *
+ * Original examples and documentation at: http://trancybox.net
+ *
+ * This fork is mainly a place to put small scale
+ * modifications done while using trancybox.
+ *
+ * Copyright (c) 2008 - 2010 Janis Skarnelis & Contributors
+ *
+ * Version: 0.1 (20/01/2012)
+ * Requires: jQuery v1.3+
+ *
+ * Dual licensed under the MIT and GPL licenses:
+ *   http://www.opensource.org/licenses/mit-license.php
+ *   http://www.gnu.org/licenses/gpl.html
+ */
+
 ;(function($) {
 	var tmp, loading, overlay, wrap, outer, content, close, title, nav_left, nav_right,
 
