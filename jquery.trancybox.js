@@ -274,7 +274,7 @@
 				case 'iframe':
           $.trancybox.showActivity();
           var first = true;
-          $('<iframe id="trancybox-frame" name="trancybox-frame' + new Date().getTime() + '" frameborder="0" hspace="0" ' + ($.browser.msie ? 'allowtransparency="true""' : '') + ' scrolling="' + selectedOpts.scrolling + '" data-src="' + href + '"></iframe>').load(function () {
+          $('<iframe id="trancybox-frame" name="trancybox-frame' + new Date().getTime() + '" frameborder="0" hspace="0" allowtransparency="true" scrolling="' + selectedOpts.scrolling + '" data-src="' + href + '"></iframe>').load(function () {
             if (!first) {
               return;
             }
