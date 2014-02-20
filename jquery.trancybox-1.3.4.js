@@ -1,20 +1,3 @@
-/*
- * FancyBox - jQuery Plugin
- * Simple and fancy lightbox alternative
- *
- * Examples and documentation at: http://fancybox.net
- *
- * Copyright (c) 2008 - 2010 Janis Skarnelis
- * That said, it is hardly a one-person project. Many people have submitted bugs, code, and offered their advice freely. Their support is greatly appreciated.
- *
- * Version: 1.3.4 (11/11/2010)
- * Requires: jQuery v1.3+
- *
- * Dual licensed under the MIT and GPL licenses:
- *   http://www.opensource.org/licenses/mit-license.php
- *   http://www.gnu.org/licenses/gpl.html
- */
-
 ;(function($) {
 	var tmp, loading, overlay, wrap, outer, content, close, title, nav_left, nav_right,
 
@@ -56,7 +39,7 @@
 			selectedOpts.width = 'auto';
 			selectedOpts.height = 'auto';
 
-			tmp.html( '<p id="fancybox-error">The requested content cannot be loaded.<br />Please try again later.</p>' );
+			tmp.html( '<p id="trancybox-error">The requested content cannot be loaded.<br />Please try again later.</p>' );
 
 			_process_inline();
 		},
@@ -72,7 +55,7 @@
 
 			_abort();
 
-			selectedOpts = $.extend({}, $.fn.fancybox.defaults, (typeof $(obj).data('fancybox') == 'undefined' ? selectedOpts : $(obj).data('fancybox')));
+			selectedOpts = $.extend({}, $.fn.trancybox.defaults, (typeof $(obj).data('trancybox') == 'undefined' ? selectedOpts : $(obj).data('trancybox')));
 
 			ret = selectedOpts.onStart(selectedArray, selectedIndex, selectedOpts);
 
@@ -163,7 +146,7 @@
 
 			tmp.css('padding', (selectedOpts.padding + selectedOpts.margin));
 
-			$('.fancybox-inline-tmp').unbind('fancybox-cancel').bind('fancybox-change', function() {
+			$('.trancybox-inline-tmp').unbind('trancybox-cancel').bind('trancybox-change', function() {
 				$(this).replaceWith(content.children());				
 			});
 
@@ -174,17 +157,17 @@
 				break;
 
 				case 'inline' :
-					if ( $(obj).parent().is('#fancybox-content') === true) {
+					if ( $(obj).parent().is('#trancybox-content') === true) {
 						busy = false;
 						return;
 					}
 
-					$('<div class="fancybox-inline-tmp" />')
+					$('<div class="trancybox-inline-tmp" />')
 						.hide()
 						.insertBefore( $(obj) )
-						.bind('fancybox-cleanup', function() {
+						.bind('trancybox-cleanup', function() {
 							$(this).replaceWith(content.children());
-						}).bind('fancybox-cancel', function() {
+						}).bind('trancybox-cancel', function() {
 							$(this).replaceWith(tmp.children());
 						});
 
@@ -196,7 +179,7 @@
 				case 'image':
 					busy = false;
 
-					$.fancybox.showActivity();
+					$.trancybox.showActivity();
 
 					imgPreloader = new Image();
 
@@ -236,7 +219,7 @@
 				case 'ajax':
 					busy = false;
 
-					$.fancybox.showActivity();
+					$.trancybox.showActivity();
 
 					selectedOpts.ajax.win = selectedOpts.ajax.success;
 
@@ -308,7 +291,7 @@
 			selectedOpts.height = imgPreloader.height;
 
 			$("<img />").attr({
-				'id' : 'fancybox-img',
+				'id' : 'trancybox-img',
 				'src' : imgPreloader.src,
 				'alt' : selectedOpts.title
 			}).appendTo( tmp );
@@ -322,7 +305,7 @@
 			loading.hide();
 
 			if (wrap.is(":visible") && false === currentOpts.onCleanup(currentArray, currentIndex, currentOpts)) {
-				$.event.trigger('fancybox-cancel');
+				$.event.trigger('trancybox-cancel');
 
 				busy = false;
 				return;
@@ -353,9 +336,9 @@
 
 				if (!overlay.is(':visible')) {
 					if (isIE6) {
-						$('select:not(#fancybox-tmp select)').filter(function() {
+						$('select:not(#trancybox-tmp select)').filter(function() {
 							return this.style.visibility !== 'hidden';
-						}).css({'visibility' : 'hidden'}).one('fancybox-cleanup', function() {
+						}).css({'visibility' : 'hidden'}).one('trancybox-cleanup', function() {
 							this.style.visibility = 'inherit';
 						});
 					}
@@ -389,7 +372,7 @@
 						content.html( tmp.contents() ).fadeTo(currentOpts.changeFade, 1, _finish);
 					};
 
-					$.event.trigger('fancybox-change');
+					$.event.trigger('trancybox-change');
 
 					content
 						.empty()
@@ -464,10 +447,10 @@
 		_format_title = function(title) {
 			if (title && title.length) {
 				if (currentOpts.titlePosition == 'float') {
-					return '<table id="fancybox-title-float-wrap" cellpadding="0" cellspacing="0"><tr><td id="fancybox-title-float-left"></td><td id="fancybox-title-float-main">' + title + '</td><td id="fancybox-title-float-right"></td></tr></table>';
+					return '<table id="trancybox-title-float-wrap" cellpadding="0" cellspacing="0"><tr><td id="trancybox-title-float-left"></td><td id="trancybox-title-float-main">' + title + '</td><td id="trancybox-title-float-right"></td></tr></table>';
 				}
 
-				return '<div id="fancybox-title-' + currentOpts.titlePosition + '">' + title + '</div>';
+				return '<div id="trancybox-title-' + currentOpts.titlePosition + '">' + title + '</div>';
 			}
 
 			return false;
@@ -495,7 +478,7 @@
 			}
 
 			title
-				.addClass('fancybox-title-' + currentOpts.titlePosition)
+				.addClass('trancybox-title-' + currentOpts.titlePosition)
 				.html( titleStr )
 				.appendTo( 'body' )
 				.show();
@@ -551,11 +534,11 @@
 				$(document).bind('keydown.fb', function(e) {
 					if (e.keyCode == 27 && currentOpts.enableEscapeButton) {
 						e.preventDefault();
-						$.fancybox.close();
+						$.trancybox.close();
 
 					} else if ((e.keyCode == 37 || e.keyCode == 39) && currentOpts.enableKeyboardNav && e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA' && e.target.tagName !== 'SELECT') {
 						e.preventDefault();
-						$.fancybox[ e.keyCode == 37 ? 'prev' : 'next']();
+						$.trancybox[ e.keyCode == 37 ? 'prev' : 'next']();
 					}
 				});
 			}
@@ -598,28 +581,28 @@
 			_set_navigation();
 	
 			if (currentOpts.hideOnContentClick)	{
-				content.bind('click', $.fancybox.close);
+				content.bind('click', $.trancybox.close);
 			}
 
 			if (currentOpts.hideOnOverlayClick)	{
-				overlay.bind('click', $.fancybox.close);
+				overlay.bind('click', $.trancybox.close);
 			}
 
-			$(window).bind("resize.fb", $.fancybox.resize);
+			$(window).bind("resize.fb", $.trancybox.resize);
 
 			if (currentOpts.centerOnScroll) {
-				$(window).bind("scroll.fb", $.fancybox.center);
+				$(window).bind("scroll.fb", $.trancybox.center);
 			}
 
 			if (currentOpts.type == 'iframe') {
-				$('<iframe id="fancybox-frame" name="fancybox-frame' + new Date().getTime() + '" frameborder="0" hspace="0" ' + ($.browser.msie ? 'allowtransparency="true""' : '') + ' scrolling="' + selectedOpts.scrolling + '" src="' + currentOpts.href + '"></iframe>').appendTo(content);
+				$('<iframe id="trancybox-frame" name="trancybox-frame' + new Date().getTime() + '" frameborder="0" hspace="0" ' + ($.browser.msie ? 'allowtransparency="true""' : '') + ' scrolling="' + selectedOpts.scrolling + '" src="' + currentOpts.href + '"></iframe>').appendTo(content);
 			}
 
 			wrap.show();
 
 			busy = false;
 
-			$.fancybox.center();
+			$.trancybox.center();
 
 			currentOpts.onComplete(currentArray, currentIndex, currentOpts);
 
@@ -784,13 +767,13 @@
 	 * Public methods 
 	 */
 
-	$.fn.fancybox = function(options) {
+	$.fn.trancybox = function(options) {
 		if (!$(this).length) {
 			return this;
 		}
 
 		$(this)
-			.data('fancybox', $.extend({}, options, ($.metadata ? $(this).metadata() : {})))
+			.data('trancybox', $.extend({}, options, ($.metadata ? $(this).metadata() : {})))
 			.unbind('click.fb')
 			.bind('click.fb', function(e) {
 				e.preventDefault();
@@ -824,7 +807,7 @@
 		return this;
 	};
 
-	$.fancybox = function(obj) {
+	$.trancybox = function(obj) {
 		var opts;
 
 		if (busy) {
@@ -840,9 +823,9 @@
 		if ($.isArray(obj)) {
 			for (var i = 0, j = obj.length; i < j; i++) {
 				if (typeof obj[i] == 'object') {
-					$(obj[i]).data('fancybox', $.extend({}, opts, obj[i]));
+					$(obj[i]).data('trancybox', $.extend({}, opts, obj[i]));
 				} else {
-					obj[i] = $({}).data('fancybox', $.extend({content : obj[i]}, opts));
+					obj[i] = $({}).data('trancybox', $.extend({content : obj[i]}, opts));
 				}
 			}
 
@@ -850,9 +833,9 @@
 
 		} else {
 			if (typeof obj == 'object') {
-				$(obj).data('fancybox', $.extend({}, opts, obj));
+				$(obj).data('trancybox', $.extend({}, opts, obj));
 			} else {
-				obj = $({}).data('fancybox', $.extend({content : obj}, opts));
+				obj = $({}).data('trancybox', $.extend({content : obj}, opts));
 			}
 
 			selectedArray.push(obj);
@@ -865,26 +848,26 @@
 		_start();
 	};
 
-	$.fancybox.showActivity = function() {
+	$.trancybox.showActivity = function() {
 		clearInterval(loadingTimer);
 
 		loading.show();
 		loadingTimer = setInterval(_animate_loading, 66);
 	};
 
-	$.fancybox.hideActivity = function() {
+	$.trancybox.hideActivity = function() {
 		loading.hide();
 	};
 
-	$.fancybox.next = function() {
-		return $.fancybox.pos( currentIndex + 1);
+	$.trancybox.next = function() {
+		return $.trancybox.pos( currentIndex + 1);
 	};
 
-	$.fancybox.prev = function() {
-		return $.fancybox.pos( currentIndex - 1);
+	$.trancybox.prev = function() {
+		return $.trancybox.pos( currentIndex - 1);
 	};
 
-	$.fancybox.pos = function(pos) {
+	$.trancybox.pos = function(pos) {
 		if (busy) {
 			return;
 		}
@@ -905,14 +888,14 @@
 		return;
 	};
 
-	$.fancybox.cancel = function() {
+	$.trancybox.cancel = function() {
 		if (busy) {
 			return;
 		}
 
 		busy = true;
 
-		$.event.trigger('fancybox-cancel');
+		$.event.trigger('trancybox-cancel');
 
 		_abort();
 
@@ -921,8 +904,8 @@
 		busy = false;
 	};
 
-	// Note: within an iframe use - parent.$.fancybox.close();
-	$.fancybox.close = function() {
+	// Note: within an iframe use - parent.$.trancybox.close();
+	$.trancybox.close = function() {
 		if (busy || wrap.is(':hidden')) {
 			return;
 		}
@@ -957,7 +940,7 @@
 			title.empty().hide();
 			wrap.hide();
 
-			$.event.trigger('fancybox-cleanup');
+			$.event.trigger('trancybox-cleanup');
 
 			content.empty();
 
@@ -1002,15 +985,15 @@
 		}
 	};
 
-	$.fancybox.resize = function() {
+	$.trancybox.resize = function() {
 		if (overlay.is(':visible')) {
 			overlay.css('height', $(document).height());
 		}
 
-		$.fancybox.center(true);
+		$.trancybox.center(true);
 	};
 
-	$.fancybox.center = function() {
+	$.trancybox.center = function() {
 		var view, align;
 
 		if (busy) {
@@ -1032,42 +1015,42 @@
 			}, typeof arguments[0] == 'number' ? arguments[0] : 200);
 	};
 
-	$.fancybox.init = function() {
-		if ($("#fancybox-wrap").length) {
+	$.trancybox.init = function() {
+		if ($("#trancybox-wrap").length) {
 			return;
 		}
 
 		$('body').append(
-			tmp	= $('<div id="fancybox-tmp"></div>'),
-			loading	= $('<div id="fancybox-loading"><div></div></div>'),
-			overlay	= $('<div id="fancybox-overlay"></div>'),
-			wrap = $('<div id="fancybox-wrap"></div>')
+			tmp	= $('<div id="trancybox-tmp"></div>'),
+			loading	= $('<div id="trancybox-loading"><div></div></div>'),
+			overlay	= $('<div id="trancybox-overlay"></div>'),
+			wrap = $('<div id="trancybox-wrap"></div>')
 		);
 
-		outer = $('<div id="fancybox-outer"></div>')
-			.append('<div class="fancybox-bg" id="fancybox-bg-n"></div><div class="fancybox-bg" id="fancybox-bg-ne"></div><div class="fancybox-bg" id="fancybox-bg-e"></div><div class="fancybox-bg" id="fancybox-bg-se"></div><div class="fancybox-bg" id="fancybox-bg-s"></div><div class="fancybox-bg" id="fancybox-bg-sw"></div><div class="fancybox-bg" id="fancybox-bg-w"></div><div class="fancybox-bg" id="fancybox-bg-nw"></div>')
+		outer = $('<div id="trancybox-outer"></div>')
+			.append('<div class="trancybox-bg" id="trancybox-bg-n"></div><div class="trancybox-bg" id="trancybox-bg-ne"></div><div class="trancybox-bg" id="trancybox-bg-e"></div><div class="trancybox-bg" id="trancybox-bg-se"></div><div class="trancybox-bg" id="trancybox-bg-s"></div><div class="trancybox-bg" id="trancybox-bg-sw"></div><div class="trancybox-bg" id="trancybox-bg-w"></div><div class="trancybox-bg" id="trancybox-bg-nw"></div>')
 			.appendTo( wrap );
 
 		outer.append(
-			content = $('<div id="fancybox-content"></div>'),
-			close = $('<a id="fancybox-close"></a>'),
-			title = $('<div id="fancybox-title"></div>'),
+			content = $('<div id="trancybox-content"></div>'),
+			close = $('<a id="trancybox-close"></a>'),
+			title = $('<div id="trancybox-title"></div>'),
 
-			nav_left = $('<a href="javascript:;" id="fancybox-left"><span class="fancy-ico" id="fancybox-left-ico"></span></a>'),
-			nav_right = $('<a href="javascript:;" id="fancybox-right"><span class="fancy-ico" id="fancybox-right-ico"></span></a>')
+			nav_left = $('<a href="javascript:;" id="trancybox-left"><span class="fancy-ico" id="trancybox-left-ico"></span></a>'),
+			nav_right = $('<a href="javascript:;" id="trancybox-right"><span class="fancy-ico" id="trancybox-right-ico"></span></a>')
 		);
 
-		close.click($.fancybox.close);
-		loading.click($.fancybox.cancel);
+		close.click($.trancybox.close);
+		loading.click($.trancybox.cancel);
 
 		nav_left.click(function(e) {
 			e.preventDefault();
-			$.fancybox.prev();
+			$.trancybox.prev();
 		});
 
 		nav_right.click(function(e) {
 			e.preventDefault();
-			$.fancybox.next();
+			$.trancybox.next();
 		});
 
 		if ($.fn.mousewheel) {
@@ -1077,24 +1060,24 @@
 
 				} else if ($(e.target).get(0).clientHeight == 0 || $(e.target).get(0).scrollHeight === $(e.target).get(0).clientHeight) {
 					e.preventDefault();
-					$.fancybox[ delta > 0 ? 'prev' : 'next']();
+					$.trancybox[ delta > 0 ? 'prev' : 'next']();
 				}
 			});
 		}
 
 		if (!$.support.opacity) {
-			wrap.addClass('fancybox-ie');
+			wrap.addClass('trancybox-ie');
 		}
 
 		if (isIE6) {
-			loading.addClass('fancybox-ie6');
-			wrap.addClass('fancybox-ie6');
+			loading.addClass('trancybox-ie6');
+			wrap.addClass('trancybox-ie6');
 
-			$('<iframe id="fancybox-hide-sel-frame" src="' + (/^https/i.test(window.location.href || '') ? 'javascript:void(false)' : 'about:blank' ) + '" scrolling="no" border="0" frameborder="0" tabindex="-1"></iframe>').prependTo(outer);
+			$('<iframe id="trancybox-hide-sel-frame" src="' + (/^https/i.test(window.location.href || '') ? 'javascript:void(false)' : 'about:blank' ) + '" scrolling="no" border="0" frameborder="0" tabindex="-1"></iframe>').prependTo(outer);
 		}
 	};
 
-	$.fn.fancybox.defaults = {
+	$.fn.trancybox.defaults = {
 		padding : 10,
 		margin : 40,
 		opacity : false,
@@ -1150,7 +1133,7 @@
 	};
 
 	$(document).ready(function() {
-		$.fancybox.init();
+		$.trancybox.init();
 	});
 
 })(jQuery);
