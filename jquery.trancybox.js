@@ -463,8 +463,6 @@
 
       if (currentOpts.type!='iframe') {
         content.html(tmp.contents());
-      } else {
-        $('#trancybox-close').click(function () {content.html('')});
       }
 
 			wrap
@@ -967,11 +965,6 @@
 			return;
 		}
 
-    if (e) {
-      e.preventDefault();
-      e.stopPropagation();
-    }
-
 		busy = true;
 
     var close_event = $.Event('trancybox-close');
@@ -982,6 +975,10 @@
 			busy = false;
 			return;
 		}
+    
+    if (currentOpts.type=='iframe') {
+      content.html('');
+    }
 
 		_abort();
 
