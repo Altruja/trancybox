@@ -272,15 +272,9 @@
 				break;
 
 				case 'iframe':
-          $.trancybox.showActivity();
-          var first = true;
-          $('<iframe id="trancybox-frame" name="trancybox-frame' + new Date().getTime() + '" frameborder="0" hspace="0" allowtransparency="true" scrolling="' + selectedOpts.scrolling + '" data-src="' + href + '"></iframe>').load(function () {
-            if (!first) {
-              return;
-            }
-            first = false;
-            _process_iframe();
-          }).appendTo(content);
+        $.trancybox.showActivity();  
+        outer.height(200);
+        _process_iframe();
         break;
 			}
 		},
@@ -646,6 +640,10 @@
       }
 
       if (currentOpts.type == 'iframe') {
+          var count = 0;
+          $('<iframe id="trancybox-frame" name="trancybox-frame' + new Date().getTime() + '" frameborder="0" hspace="0" allowtransparency="true" height="0" scrolling="' + currentOpts.scrolling + '" src="' + currentOpts.href + '"></iframe>').appendTo(content);
+
+
         if(selectedOpts.height=='auto') {
           $('#trancybox-frame').on('load', function () {
             var measured_height = $('#trancybox-frame').contents().height();
@@ -964,10 +962,15 @@
 	};
 
 	// Note: within an iframe use - parent.$.trancybox.close();
-	$.trancybox.close = function() {
+	$.trancybox.close = function(e) {
 		if (busy || wrap.is(':hidden')) {
 			return;
 		}
+
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
 
 		busy = true;
 
