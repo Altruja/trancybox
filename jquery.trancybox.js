@@ -640,7 +640,7 @@
       if (currentOpts.type == 'iframe') {
           var count = 0;
           $('<iframe id="trancybox-frame" name="trancybox-frame' + new Date().getTime() + '" frameborder="0" hspace="0" allowtransparency="true" height="0" scrolling="' + currentOpts.scrolling + '" src="' + currentOpts.href + '"></iframe>').appendTo(content);
-
+          $.event.trigger('trancybox-frame');
 
         if(selectedOpts.height=='auto') {
           $('#trancybox-frame').on('load', function () {
