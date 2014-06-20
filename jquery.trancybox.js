@@ -592,8 +592,8 @@
 
 		_finish = function () {
       if (!$.support.opacity) {
-				content.get(0).style.removeAttribute('filter');
-				wrap.get(0).style.removeAttribute('filter');
+				content.removeAttr('filter');
+				wrap.removeAttr('filter');
 			}
 
 			if (selectedOpts.autoDimensions) {
