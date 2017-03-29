@@ -635,6 +635,7 @@
         $.trancybox.center();
 
         currentOpts.onComplete(currentArray, currentIndex, currentOpts);
+        $.event.trigger('trancybox-complete', [currentOpts]);
       }
 
       if (currentOpts.type == 'iframe') {
@@ -706,10 +707,10 @@
 
 		_get_viewport = function() {
 			return [
-				$(window).width() - (currentOpts.margin * 2),
-				$(window).height() - (currentOpts.margin * 2),
-				$(document).scrollLeft() + currentOpts.margin,
-				$(document).scrollTop() + currentOpts.margin
+				$(window).width() - (currentOpts.marginRight || (currentOpts.margin * 2)),
+				$(window).height() - (currentOpts.marginBottom || (currentOpts.margin * 2)),
+				$(document).scrollLeft() + (currentOpts.marginLeft || currentOpts.margin),
+				$(document).scrollTop() + (currentOpts.marginTop || currentOpts.margin)
 			];
 		},
 
@@ -1134,6 +1135,10 @@
 	};
 
 	$.fn.trancybox.defaults = {
+    marginLeft: null,
+    marginTop: null,
+    marginRight: null,
+    marginBottom: null,
 		padding : 10,
 		margin : 40,
 		opacity : false,
